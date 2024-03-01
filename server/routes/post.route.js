@@ -1,10 +1,8 @@
 const express=require("express")
 
 const postRouter=express.Router()
-
-postRouter.get("/",(req,res)=>{
-    res.send({"msg":"This works well Right!"})
-})
+const {getPosts}=require("../controllers/post.controllers.js")
+postRouter.get("/",getPosts)
 
 module.exports={
     postRouter
