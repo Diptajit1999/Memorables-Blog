@@ -19,7 +19,7 @@ app.listen(7000,async()=>{
     try {
         await connection;
         console.log("Connected to the Database")
-        console.log(`Server is running at PORT 6000`)
+        console.log(`Server is running at PORT 7000`)
     } catch (error) {
         console.log(`error`,error.message)
     }
