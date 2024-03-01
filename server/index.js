@@ -1,21 +1,27 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import bodyParser from "body-parser";
+const express=require("express")
+const bodyParser=require("body-parser")
+const cors=require("cors");
+const {connection}=require("./db")
+const {postRouter}=require("./routes/post.route")
 
 
 
-const app=Express();
+const app=express()
 
-app.use(bodyParser.json({limit:"30mb",extended:true}))
-app.use(bodyParser.urlencoded({limit:"30mb",extended:true}))
+app.use("/posts",postRouter)
 
+app.use(express.json())
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors())
 
-const MongodbURL="mongodb+srv://diptajitdas66:Dipatjit@cluster0.jsg7tjf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
-const PORT=process.env.PORT||5000;
-
-mongoose.connect(MongodbURL,{useNewUrlparser:true,useUnifiedTopology:true}).then(()=>app.listen(PORT,()=>console.log(`Server is running at ${PORT}`))).catch((err)=>console.log(err.message))
-
-mongoose.set(`useFindAndModify`,false)
+app.listen(7000,async()=>{
+    try {
+        await connection;
+        console.log("Connected to the Database")
+        console.log(`Server is running at PORT 6000`)
+    } catch (error) {
+        console.log(`error`,error.message)
+    }
+    
+})
