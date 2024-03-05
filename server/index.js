@@ -7,13 +7,13 @@ const {postRouter}=require("./routes/post.route")
 
 
 const app=express()
-
+app.use(cors())
 app.use("/posts",postRouter)
 
 app.use(express.json())
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors())
+
 
 app.listen(7000,async()=>{
     try {

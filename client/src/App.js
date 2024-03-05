@@ -29,14 +29,21 @@
 
 // export default App;
 
-import React from 'react';
-import { Container, Grow, Grid } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Container,Grow,Grid} from '@mui/material';
 import memorables from "./images/memorables.png";
-import Form from "./components/Form/Form";
-import Posts from "./components/Posts/Posts";
+import Form from './components/Form/Form.jsx';
+import Posts from './components/Posts/Posts.jsx';
 import { StyledAppBar, StyledHeading, StyledImage } from './style';  // Import the styles
-
+import { useDispatch } from "react-redux";
+import {getPosts} from "./actions/posts"
 const App = () => {
+  const dispatch=useDispatch()
+
+  useEffect(()=>{
+    dispatch(getPosts())
+  },[dispatch])
+
   return (
     <Container maxWidth="lg">
       {/* Use the styled components */}
@@ -48,10 +55,12 @@ const App = () => {
         <Container>
           <Grid container justify="space-between" alignItems='stretch' spacing={3}>
             <Grid item xs={12} sm={7}>
-              <Posts />
+              {/* <Posts /> */}
+              <Posts/>
             </Grid>
             <Grid item xs={12} sm={5}>
-              <Form />
+              {/* <Form/> */}
+              <Form/>
             </Grid>
           </Grid>
         </Container>
@@ -61,3 +70,4 @@ const App = () => {
 };
 
 export default App;
+
