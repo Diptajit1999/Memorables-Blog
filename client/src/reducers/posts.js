@@ -3,8 +3,9 @@ export const postsReducer= (posts=[],action)=>{
         case "FETCH_ALL":{
             return action.payload;
         }
-        case "CREATE":{
-            return posts
+        case "CREATE_POST":{
+            console.log(action.payload)
+            return [...posts,action.payload]
         }
         default:
             return posts;

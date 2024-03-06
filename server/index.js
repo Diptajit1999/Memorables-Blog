@@ -1,4 +1,5 @@
 const express=require("express")
+const morgan = require("morgan")
 const bodyParser=require("body-parser")
 const cors=require("cors");
 const {connection}=require("./db")
@@ -7,7 +8,15 @@ const {postRouter}=require("./routes/post.route")
 
 
 const app=express()
-app.use(cors())
+app.use(morgan("dev"))
+// app.use(cors())
+const corsOptions = {
+    origin: 'http://localhost:3000', // Replace with your client-side origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Enable cookies and authorization headers
+  };
+  
+  app.use(cors(corsOptions));
 app.use("/posts",postRouter)
 
 app.use(express.json())
